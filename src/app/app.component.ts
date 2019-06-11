@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MainService, DOCTORS } from './main.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'doctors';
+  list: any[];
+
+  constructor(private mainService: MainService) { }
+
+  ngOnInit() {
+    this.mainService.fetchData(DOCTORS).subscribe(data => {
+      console.log(data);
+      this.list = data;
+    });
+  }
+
 }

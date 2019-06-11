@@ -1,0 +1,15 @@
+<div class="list-item">
+  <a href={{item.id}} (click)="onClick(item.id)">
+  <h5>Dr. {{item.name}}</h5>
+  <p><strong>Address:</strong> {{item.address.city}}, {{item.address.zipcode}}</p>
+  </a>
+</div>
+<div *ngIf="showInfo" class="data">
+  <p>Email: {{item.email}}</p>
+  <p>Street: {{item.address.street}}</p>
+  <p>Office: {{item.address.suite}}</p>
+  <button class="btn btn-primary" (click)="toggleTasks()">tasks</button>
+</div>
+<div *ngIf="showTasks" class="data">
+  <app-tasks *ngFor="let task of tasks" [task]="task"></app-tasks>
+</div>
