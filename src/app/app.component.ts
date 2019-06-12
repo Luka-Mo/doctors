@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MainService, DOCTORS } from './main.service';
 
 @Component({
@@ -6,14 +6,14 @@ import { MainService, DOCTORS } from './main.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  list: any[];
+export class AppComponent implements OnInit {
+  @Input() item: any[];
+  @Input() list: any[];
 
   constructor(private mainService: MainService) { }
 
   ngOnInit() {
     this.mainService.fetchData(DOCTORS).subscribe(data => {
-      console.log(data);
       this.list = data;
     });
   }

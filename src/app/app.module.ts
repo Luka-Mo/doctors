@@ -16,7 +16,9 @@ import { TasksComponent } from './components/tasks/tasks.component';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    HttpClientModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

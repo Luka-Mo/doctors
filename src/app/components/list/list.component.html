@@ -1,14 +1,49 @@
 <div class="list-item">
   <a href={{item.id}} (click)="onClick(item.id)">
   <h5>Dr. {{item.name}}</h5>
-  <p><strong>Address:</strong> {{item.address.city}}, {{item.address.zipcode}}</p>
+  <p><strong>City:</strong> {{item.address.city}}, {{item.address.zipcode}}</p>
   </a>
 </div>
-<div *ngIf="showInfo" class="data">
-  <p>Email: {{item.email}}</p>
-  <p>Street: {{item.address.street}}</p>
-  <p>Office: {{item.address.suite}}</p>
-  <button class="btn btn-primary" (click)="toggleTasks()">tasks</button>
+<div *ngIf="showInfo" class="data container-fluid">
+  <div class="row">
+    <div class="col-sm-12"><h4>Contact information</h4></div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-3">Specialty:</div>
+    <div class="col-sm-9 strong">{{item.company.catchPhrase}}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">Phone:</div>
+    <div class="col-sm-3 strong">{{item.phone}} </div>
+    <div class="col-sm-3">E-mail:</div>
+    <div class="col-sm-3 strong"><a href="mailto:{{item.email}}">{{item.email}}</a></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">Website </div>
+    <div class="col-sm-3 strong"><a href="/">{{item.website}}</a> </div>
+    <div class="col-sm-3">Username:</div>
+    <div class="col-sm-3 strong">{{item.username}} </div>
+    
+  </div>
+  <div class="row mt-3">
+    <div class="col-sm-12"><h4>{{item.company.name}} Clinic</h4></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">Address: </div>
+    <div class="col-sm-3 strong"><a href="http://www.google.com/maps/place/{{item.address.geo.lat}},{{item.address.geo.lng}}" target="_blank" rel="noopener noreferrer">{{item.address.street}}</a></div>
+    <div class="col-sm-3">Office: </div>
+    <div class="col-sm-3 strong">{{item.address.suite}}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">City:</div>
+    <div class="col-sm-3 strong">{{item.address.city}} </div>
+    <div class="col-sm-3">ZIP:</div>
+    <div class="col-sm-3 strong">{{item.address.zipcode}} </div>
+  </div>
+  <div class="row mt-3 mb-3">
+    <button class="btn btn-primary btn-block" (click)="toggleTasks()">Tasks</button>
+  </div>
 </div>
 <div *ngIf="showTasks" class="data">
   <app-tasks *ngFor="let task of tasks" [task]="task"></app-tasks>

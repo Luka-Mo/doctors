@@ -1,13 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 /*
-https://coolors.co/eaeaea-cbc5ea-73628a-313d5a-183642-39A0ED-92DCE5
+https://coolors.co/eaeaea-cbc5ea-73628a-313d5a-183642-
+-70A0AF
 */
 
 $bg-color: #eaeaea;
+$bg-color-secondary: #d0d0d0;
 $primary: #39a0ed;
 $secondary: #92dce5;
 $accentOne: #313d5a;
 $accentTwo: #183642;
+$accentThree: #A8E0FF;
 
 $text: #fff;
 $text-dark: #000;
@@ -16,6 +19,7 @@ body {
 }
 .list-item {
     background: $primary;
+    margin-bottom: 2px;
 
     a {
         display: block;
@@ -34,4 +38,42 @@ body {
     background: $bg-color;
     color: $text-dark;
     padding: 10px;
+}
+.task {
+    background: $accentThree;
+    border-radius: 15px;
+    padding: 10px;
+    margin-bottom: 2px;
+}
+.row {
+    margin-bottom: 2px;
+
+    a {
+        text-decoration: none;
+        color: $primary;
+        &:hover {
+            color: $secondary;
+        }
+    }
+
+}
+.strong {
+    font-weight: 600;
+}
+.completed {
+    background-color: $bg-color-secondary;
+    filter: blur(1px);
+    opacity: 0.7;
+
+    &:hover {
+        filter: blur(0px);
+    }
+}
+.btn-primary {
+    background-color: $primary !important;
+    color: $text;
+
+    &:hover {
+        background-color: $secondary !important;
+    }
 }

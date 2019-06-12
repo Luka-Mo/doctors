@@ -7,10 +7,11 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TasksComponent implements OnInit {
   @Input() task: any[];
+
   constructor() { }
 
   ngOnInit() {
-    
+
   }
 
 }

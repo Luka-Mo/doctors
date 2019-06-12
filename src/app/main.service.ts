@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
@@ -16,7 +16,7 @@ export class MainService {
 
   constructor(private http: HttpClient) { }
 
-  fetchData(type): Observable<any> {
+  fetchData(type: string): Observable<any> {
     return this.http.get<any>(URL + type);
   }
 
