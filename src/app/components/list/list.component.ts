@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MainService, TASKS, DOCTORS, QUERY } from '../../main.service';
+import { MainService, TASKS, QUERY } from '../../main.service';
 import { List } from '../../types';
 
 @Component({
@@ -27,7 +27,6 @@ export class ListComponent implements OnInit {
     // https://jsonplaceholder.typicode.com/todos?userId=1
     this.mainService.fetchData(TASKS + QUERY + this.item.id).subscribe(data => {
       this.tasks = data;
-      console.log(this.tasks);
     });
   }
 
