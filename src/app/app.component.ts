@@ -7,8 +7,7 @@ import { MainService, DOCTORS } from './main.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  @Input() item: any[];
-  @Input() list: any[];
+  list: any[];
 
   constructor(private mainService: MainService) { }
 

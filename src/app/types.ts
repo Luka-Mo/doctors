@@ -1,4 +1,4 @@
-// set types
+// Types:
 
 export interface List  {
     id: number;

@@ -3,10 +3,11 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
-// constants:
+// URL vars:
 export const URL = ' https://jsonplaceholder.typicode.com';
 export const DOCTORS = '/users/';
 export const TASKS = '/todos';
+export const QUERY = '?userId=';
 
 
 @Injectable({

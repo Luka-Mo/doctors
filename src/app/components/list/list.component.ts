@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MainService, TASKS, DOCTORS } from '../../main.service';
+import { MainService, TASKS, DOCTORS, QUERY } from '../../main.service';
 import { List } from '../../types';
 
 @Component({
@@ -9,16 +9,25 @@ import { List } from '../../types';
 })
 export class ListComponent implements OnInit {
   @Input() item: List;
-  @Input() showInfo = false;
-  @Input() showTasks = false;
-
-  tasks: any[];
+  showInfo = false;
+  showTasks = false;
+  tasks: string[];
 
   constructor(private mainService: MainService) { }
 
   ngOnInit() {
+    // Nested route not functioning properly: returns all userIds
+    // https://jsonplaceholder.typicode.com/users/1/todos
+    /*
     this.mainService.fetchData(DOCTORS + this.item.id + TASKS).subscribe(data =>{
       this.tasks = data.filter(({userId}) => userId === this.item.id)
+    });
+    */
+
+    // https://jsonplaceholder.typicode.com/todos?userId=1
+    this.mainService.fetchData(TASKS + QUERY + this.item.id).subscribe(data => {
+      this.tasks = data;
+      console.log(this.tasks);
     });
   }
 
