@@ -20,17 +20,18 @@ body {
 .list-item {
     background: $primary;
     margin-bottom: 2px;
-
+    color: $text;
+    
     a {
         display: block;
         width: 100%;
         height: 100%;
         text-decoration: none;
-        color: $text;
         padding: 10px;
 
         &:hover {
-            background: $secondary
+            background: $secondary;
+            cursor: pointer;
         }
     }
 }

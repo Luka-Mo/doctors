@@ -1,5 +1,5 @@
 <div class="list-item">
-  <a href={{item.id}} (click)="onClick(item.id)">
+  <a (click)="toggleInfo()">
   <h5>Dr. {{item.name}}</h5>
   <p><strong>City:</strong> {{item.address.city}}, {{item.address.zipcode}}</p>
   </a>

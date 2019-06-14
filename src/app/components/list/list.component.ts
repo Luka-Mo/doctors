@@ -25,15 +25,21 @@ export class ListComponent implements OnInit {
     */
 
     // https://jsonplaceholder.typicode.com/todos?userId=1
+    /*
     this.mainService.fetchData(TASKS + QUERY + this.item.id).subscribe(data => {
       this.tasks = data;
     });
+    */
+
+  // third option:
+   this.mainService.tasks.subscribe(data => this.tasks = data.filter(({userId}) => userId === this.item.id ));
+
   }
 
 
-  onClick(id: number) {
+  toggleInfo() {
     // prevent default - event is deprecated?!
-    event.preventDefault();
+    // event.preventDefault();
     this.showInfo = !this.showInfo;
 
     if (!this.showInfo) {

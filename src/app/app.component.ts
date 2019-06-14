@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MainService, DOCTORS } from './main.service';
+import { Component, OnInit } from '@angular/core';
+import { MainService } from './main.service';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +12,15 @@ export class AppComponent implements OnInit {
   constructor(private mainService: MainService) { }
 
   ngOnInit() {
+    // better:
+    this.mainService.doctors.subscribe(data => this.list = data);
+
+    // previous:
+    /*
     this.mainService.fetchData(DOCTORS).subscribe(data => {
       this.list = data;
     });
+    */
   }
 
 }
