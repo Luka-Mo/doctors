@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { TasksComponent } from './tasks.component';
 import { mockTasks } from 'src/app/testdata';
@@ -9,8 +9,7 @@ describe('TasksComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TasksComponent ],
-      providers: [ TasksComponent ]
+      declarations: [ TasksComponent ]
     })
     .compileComponents();
   }));
@@ -18,16 +17,20 @@ describe('TasksComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TasksComponent);
     component = fixture.componentInstance;
+    component.task = mockTasks[Math.floor(Math.random() * mockTasks.length)];
+    fixture.detectChanges();
   });
 
   it('should create TaskComponent', () => {
-    expect(component).toBeTruthy();
+    expect(fixture).toBeTruthy();
   });
 
-  it('should display a task', () => {
-    component.task = mockTasks[Math.floor(Math.random() * mockTasks.length)];
-    fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('task-title')).not.toBe('');
+  it('should have a task object defined', () => {
+    expect(component.task).toBeDefined();
+  });
+
+  it(`should display a task`, () => {
+    expect(fixture.nativeElement.querySelector('p').textContent).toBe(component.task.title);
   });
 
 });

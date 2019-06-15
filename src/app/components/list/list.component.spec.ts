@@ -60,6 +60,6 @@ describe('ListComponent', () => {
     component.showInfo = true;
     fixture.detectChanges();
     getTasksSpy.and.returnValue(mockTasks);
-    expect(fixture.nativeElement.querySelector('h4').innerHTML).toBe('Contact information');
+    expect(fixture.nativeElement.querySelector('h4').textContent).toBe('Contact information');
   });
 });

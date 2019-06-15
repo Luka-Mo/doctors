@@ -1,6 +1,6 @@
 <div *ngIf="task" [className]="(task.completed) ? ' task completed' : 'task'">
   <div class="row">
     <div class="col-sm-1">Task:</div>
-    <div class="col-sm-10 strong" class="task-title">{{task.title}}</div>
+    <div class="col-sm-10 strong"><p>{{task.title}}</p></div>
     <div class="col-sm-1 strong" *ngIf="task.completed">✓</div>
 </div>
