@@ -1,40 +1,38 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { ListComponent } from './components/list/list.component';
 import { MainService } from './main.service';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClient } from '@angular/common/http';
-import { mockDoctor } from './testdata';
+import { mockDoctor, mockTasks } from './testdata';
+import { of } from 'rxjs';
+import { TasksComponent } from './components/tasks/tasks.component';
 
 describe('AppComponent', () => {
-  let httpClient: HttpClient;
-  let httpTestingController: HttpTestingController;
+  let fixture: ComponentFixture<AppComponent>;
+  let component: AppComponent;
 
+  const mainService = jasmine.createSpyObj('MainService', ['doctors', 'tasks']);
+  const getTasksSpy = mainService.tasks.and.returnValue ( of (mockTasks));
+  const getDoctorsSpy = mainService.doctors.and.returnValue( of(mockDoctor) );
   // setup
   beforeEach(async(() => {
+
     TestBed.configureTestingModule({
-      declarations: [ AppComponent, ListComponent ],
-      imports: [ HttpClientTestingModule ],
-      providers: [ MainService, AppComponent ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      declarations: [ AppComponent, ListComponent, TasksComponent ],
+      providers: [ {provide: MainService, useValue: mainService }, AppComponent ],
     }).compileComponents();
 
-    httpClient = TestBed.get(HttpClient);
-    httpTestingController = TestBed.get(HttpTestingController);
   }));
 
-  afterEach(() => {
-    httpTestingController.verify();
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
   });
 
 
   // testing
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    app.list = mockDoctor;
-    expect(app).toBeTruthy();
+    fixture.detectChanges();
+    expect(fixture).toBeTruthy();
   });
 
 });

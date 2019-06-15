@@ -12,15 +12,7 @@ export class AppComponent implements OnInit {
   constructor(private mainService: MainService) { }
 
   ngOnInit() {
-    // better:
-    this.mainService.doctors.subscribe(data => this.list = data);
-
-    // previous:
-    /*
-    this.mainService.fetchData(DOCTORS).subscribe(data => {
-      this.list = data;
-    });
-    */
+    this.mainService.doctors().subscribe(data => this.list = data);
   }
 
 }

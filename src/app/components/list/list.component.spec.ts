@@ -1,56 +1,36 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { AppComponent } from '../../app.component';
 import { MainService } from '../../main.service';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClient } from '@angular/common/http';
-
 
 import { ListComponent } from './list.component';
 import { TasksComponent } from '../tasks/tasks.component';
-import { mockDoctor } from 'src/app/testdata';
+import { mockDoctor, mockTasks } from 'src/app/testdata';
+import { of } from 'rxjs';
 
 describe('ListComponent', () => {
-  let httpClient: HttpClient;
-  let httpTestingController: HttpTestingController;
-  let fixture: any;
-  let app: any;
-  let component: any;
+
+  let fixture: ComponentFixture<ListComponent>;
+  let component: ListComponent;
+
+  const mainService = jasmine.createSpyObj('MainService', ['tasks']);
+  const getTasksSpy = mainService.tasks.and.returnValue( of(mockTasks) );
 
   // setup
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AppComponent, ListComponent, TasksComponent ],
-      imports: [ HttpClientTestingModule ],
-      providers: [ MainService, ListComponent ],
-      // schemas: [ NO_ERRORS_SCHEMA ]
+      providers: [ { provide: MainService, useValue: mainService }, ListComponent ],
     }).compileComponents();
 
-    httpClient = TestBed.get(HttpClient);
-    httpTestingController = TestBed.get(HttpTestingController);
   }));
 
   beforeEach(() => {
-    component = TestBed.get(ListComponent);
     fixture = TestBed.createComponent(ListComponent);
-    app = fixture.debugElement.componentInstance;
-    app.item = mockDoctor;
-  });
-
-  afterEach(() => {
-    httpTestingController.verify();
+    component = fixture.componentInstance;
   });
 
   it('should create List component', () => {
-    expect(app).toBeTruthy();
-  });
-
-  it('should define Info', () => {
-    expect(component.showInfo).toBeDefined();
-  });
-
-  it('should define Tasks', () => {
-    expect(component.showTasks).toBeDefined();
+    expect(fixture).toBeTruthy();
   });
 
   it('should toggle Info', () => {
@@ -65,7 +45,7 @@ describe('ListComponent', () => {
     expect(component.showTasks).toBeTruthy();
   });
 
-  it('should set Tasks and Info to false', () => {
+  it('should set Tasks to false when Info toggled to false', () => {
     component.toggleTasks();
     component.toggleInfo();
     expect(component.showTasks).toBeTruthy();
@@ -73,5 +53,13 @@ describe('ListComponent', () => {
     component.toggleInfo();
     expect(component.showTasks).toBeFalsy();
     expect(component.showInfo).toBeFalsy();
+  });
+
+  it ('should show <h4>Contact information</h4> when showInfo === true', () => {
+    component.item = mockDoctor[0];
+    component.showInfo = true;
+    fixture.detectChanges();
+    getTasksSpy.and.returnValue(mockTasks);
+    expect(fixture.nativeElement.querySelector('h4').innerHTML).toBe('Contact information');
   });
 });

@@ -28,23 +28,14 @@ describe('MainService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('Should define doctors', () => {
+  it('should define doctors', () => {
     const service: MainService = TestBed.get(MainService);
     expect(service.doctors).toBeDefined();
   });
 
-  it('Should define tasks', () => {
+  it('should define tasks', () => {
     const service: MainService = TestBed.get(MainService);
     expect(service.tasks).toBeDefined();
   });
 
-  it('Should return doctors as an object', () => {
-    const service: MainService = TestBed.get(MainService);
-    expect(typeof service.doctors).toBe('object');
-  });
-
-  it('Should return tasks as an object', () => {
-    const service: MainService = TestBed.get(MainService);
-    expect(typeof service.tasks).toBe('object');
-  });
 });

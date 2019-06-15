@@ -6,24 +6,28 @@ import { mockTasks } from 'src/app/testdata';
 describe('TasksComponent', () => {
   let component: TasksComponent;
   let fixture: ComponentFixture<TasksComponent>;
-  let app: any;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TasksComponent ]
+      declarations: [ TasksComponent ],
+      providers: [ TasksComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TasksComponent);
-    app = fixture.debugElement.componentInstance;
-    app.task = Math.floor(Math.random()*mockTasks.length);
-    fixture.detectChanges();
+    component = fixture.componentInstance;
   });
 
   it('should create TaskComponent', () => {
-    expect(app).toBeTruthy();
+    expect(component).toBeTruthy();
+  });
+
+  it('should display a task', () => {
+    component.task = mockTasks[Math.floor(Math.random() * mockTasks.length)];
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('task-title')).not.toBe('');
   });
 
 });
