@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MainService } from '../../main.service';
 import { List } from '../../types';
+import { Observable, from } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-list',
@@ -11,19 +13,16 @@ export class ListComponent implements OnInit {
   @Input() item: List;
   showInfo = false;
   showTasks = false;
-  tasks: string[];
+  tasks$: Observable<string[]>;
 
   constructor(private mainService: MainService) { }
 
   ngOnInit() {
-    // Nested route not functioning properly: returns all userIds
-    // https://jsonplaceholder.typicode.com/users/1/todos
-    this.mainService.tasks().subscribe(data => this.tasks = data.filter(({userId}) => userId === this.item.id ));
+    this.tasks$ = this.mainService.fetchTasks(this.item.id);
   }
 
 
   toggleInfo() {
-    // event.preventDefault() -> event deprecated, href="null" / without href -> css
     this.showInfo = !this.showInfo;
 
     if (!this.showInfo) {

@@ -46,5 +46,5 @@
   </div>
 </div>
 <div *ngIf="showTasks" class="data">
-  <app-tasks *ngFor="let task of tasks" [task]="task"></app-tasks>
+  <app-tasks *ngFor="let task of tasks$ | async" [task]="task"></app-tasks>
 </div>

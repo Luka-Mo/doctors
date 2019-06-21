@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MainService } from './main.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -7,12 +8,11 @@ import { MainService } from './main.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  list: any[];
+  list: Observable<any[]>;
 
   constructor(private mainService: MainService) { }
 
   ngOnInit() {
-    this.mainService.doctors().subscribe(data => this.list = data);
+    this.list = this.mainService.doctors; // subscribe(data => this.list = data);
   }
-
 }
